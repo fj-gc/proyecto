@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="twitter:dnt" content="on">
+    <title></title>
+    <style type="text/css">
+        html {
+            font-family: sans-serif;
+        }
+        .quote-text {
+            font-size: 2em;
+            white-space: pre-wrap;
+            text-align: center;
+            padding-bottom: 10px;
+            border-bottom: solid gray;
+        }
+        .quote {
+            background-color: #ccc;
+            padding: 10px;
+            width: 500px;
+        }
+        #quote-listing {
+          display: grid;
+          grid-gap: 10px;
+          grid-template-columns: repeat(auto-fill, 186px);
+        }
+        
+        
+
+    </style>
+</head>
+<body>
+    <grid id="quote-listing">
+    {% for quote in page_obj %}
+        <div class="quote"> 
+            <blockquote class="quote-text">"{{ quote.text }}"</blockquote>
+            <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-hashtags="#mfrr_{{ quote.quote_start }}" data-show-count="false">Comentar en Twitter</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        </div>
+    {% endfor %}
+    </grid>
+
+    
+    
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+</body>
+</html>
